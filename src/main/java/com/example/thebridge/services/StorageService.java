@@ -21,20 +21,6 @@ public class StorageService {
     private StorageRepository repository;
     @Autowired
     CoursesRepository coursesRepository;
-
-    //    public String uploadImage(long idTool,MultipartFile file) throws IOException {
-//        ToolOffer to = toolOfferRepository.findById(idTool).get();
-//        ImageData imageData = repository.save(ImageData.builder()
-//                .name(file.getOriginalFilename())
-//                .type(file.getContentType())
-//                .imageData(ImageUtils.compressImage(file.getBytes())).build());
-//        if (imageData != null) {
-//            to.setImages(imageData);
-//            toolOfferRepository.save(to);
-//            return "file uploaded successfully : " + file.getOriginalFilename();
-//        }
-//        return null;
-//    }
     public ImageData uploadImage2(MultipartFile file) throws IOException {
         ImageData imageData = repository.save(ImageData.builder()
                 .name(file.getOriginalFilename())

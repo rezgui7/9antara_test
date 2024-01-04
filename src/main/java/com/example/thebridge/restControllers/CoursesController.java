@@ -40,6 +40,19 @@ public class CoursesController {
     public void deleteCourses(@PathVariable("courseId") long courseId){coursesService.deleteCourses(courseId);}
 
 //------------------------------Add with image----------------------------------------------------------
+@PutMapping(value = {"/updateNewCourse"},produces = {"text/plain","application/json"}, consumes= {"multipart/mixed", MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_OCTET_STREAM_VALUE})
+public ResponseEntity<String> updateNewCourse(@RequestPart("course") @Valid Courses course,
+                                           @RequestPart("file") MultipartFile[] file){
+    try{
+        List<ImageData> images = uploadImage(file);
+        course.setImages(images);
+        coursesService.modifieCourses(course);
+        return ResponseEntity.ok("File and JSON data received");
+    } catch (Exception e ){
+        System.out.println(e.getMessage());
+        return null;
+    }
+}
 @PostMapping(value = {"/addNewCourse"},produces = {"text/plain","application/json"}, consumes= {"multipart/mixed", MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_OCTET_STREAM_VALUE})
 public ResponseEntity<String> addNewCourse(@RequestPart("course") @Valid Courses course,
                                             @RequestPart("file") MultipartFile[] file){

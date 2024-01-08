@@ -34,6 +34,8 @@ public class CoursesController {
 
     @PutMapping("/updateCourses")
     public Courses modifieCourses(@RequestBody Courses o){ return coursesService.modifieCourses(o); }
+    @PutMapping("/updateImgs")
+    public ImageData modifieimages(@RequestBody ImageData o){ return coursesService.modifieImage(o); }
 
 
     @DeleteMapping("/deleteCourses/{courseId}")
@@ -41,7 +43,7 @@ public class CoursesController {
 
 //------------------------------Add with image----------------------------------------------------------
 @PutMapping(value = {"/updateNewCourse"},produces = {"text/plain","application/json"}, consumes= {"multipart/mixed", MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE,MediaType.APPLICATION_OCTET_STREAM_VALUE})
-public ResponseEntity<String> updateNewCourse(@RequestPart("course") @Valid Courses course,
+public ResponseEntity<String> updateCourse(@RequestPart("course") @Valid Courses course,
                                            @RequestPart("file") MultipartFile[] file){
     try{
         List<ImageData> images = uploadImage(file);
